@@ -15,7 +15,6 @@ final class Application
     public static function getInstance()
     {
         if (!self::$instance) {
-            echo 'Класс еще не создан' . '<br>';
             self::$instance = new self;
         }
         return self::$instance;
