@@ -13,8 +13,10 @@ class Config
     public function get(string $path) 
     {
         $config = explode('/', $path);
-        $configName = $config[0];
-        $param = $config[1];
-        return $this->configs[$configName][$param];
+        $param = $this->configs;
+        for ($i = 0; $i < count($config); $i++) {
+            $param = $param[$config[$i]];
+        }
+        return $param;
     }
 }
