@@ -1,0 +1,13 @@
+body {
+    text-transform: uppercase;
+    color: brown;
+    margin: 100px;
+}
+
+#content {
+    color:blueviolet;
+}
+
+h1 {
+    text-transform: uppercase;
+}
