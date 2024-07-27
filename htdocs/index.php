@@ -6,22 +6,9 @@ if (!defined('CORE')) {
     die();
 }
 
-// echo 'Это точка входа в приложение';
-
-$config = new Fw\Core\Config;
-$templateId = $config->get('template/id');
 $app->startBuffer();
-$app->header($templateId);
-$content = ob_get_contents();
-$app->getPager()->addString("<link rel='icon' href='https://cdn-icons-png.flaticon.com/512/5541/5541717.png' type='image/x-icon'>");
-$app->getPager()->addCss('/Fw/assets/main.css');
-$app->getPager()->setProperty('title', 'MySite');
-$app->getPager()->setProperty('h1', 'Главная');
-$content = $app->endBuffer(['<head>'], ['<head>' . $app->getPager()->getHead()], $content);
-$arrReplace = $app->getPager()->getAllReplace();
-$content = $app->endBuffer(array_keys($arrReplace), array_values($arrReplace), $content);
-$app->restartBuffer();
-echo $content;
+$app->header();
+echo "<p id='content'>Content</p>";
 ?>
 
 <pre>
@@ -39,6 +26,9 @@ echo $content;
 3) Создание структуры шаблона сайта.
 </pre>
 
-
-
-<?php $app->footer($templateId); ?>
+<?php 
+$app->footer();
+$content = $app->endBuffer();
+$app->restartBuffer();
+echo $content;
+?>

@@ -50,29 +50,30 @@ class Page
         $this->properties[$id] = $value;
     }
 
-    public function getProperty(string $id) : void
+    public function getProperty(string $id)
     {
         return $this->properties[$id];
     }
 
-    public function showProperty(string $id) : string
+    public function showProperty(string $id) : void
     {
         $id = strtoupper($id);
-        return "#FW_PAGE_PROPERTY_{$id}#";
+        echo "#FW_PAGE_PROPERTY_{$id}#";
     }
 
     public function getAllReplace() : array
     {
         $allReplace = [];
         foreach ($this->properties as $key=>$property) {
-            $allReplace[$this->showProperty($key)] = $property;
+            $key = strtoupper($key);
+            $allReplace["#FW_PAGE_PROPERTY_{$key}#"] = $property;
         }
         return $allReplace;
     }
 
-    public function showHead() : string
+    public function showHead() : void
     {
-        return "#FW_PAGE_MACRO_CSS#" . "#FW_PAGE_MACRO_JS#" . "#FW_PAGE_MACRO_STR#";
+        echo "#FW_PAGE_MACRO_HEAD#";
     }
 
     public function getHead() : string

@@ -24,4 +24,4 @@ spl_autoload_register(function ($class) {
 
 session_start();
 
-$app = Fw\Core\InstanceContainer::getInstance('Fw\Core\Application');
+$app = Fw\Core\InstanceContainer::getInstance(Fw\Core\Application::class);

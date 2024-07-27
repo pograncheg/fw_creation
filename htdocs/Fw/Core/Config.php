@@ -10,7 +10,7 @@ class Config
         $this->configs = include_once('./Fw/config.php');
     }
 
-    public function get(string $path) 
+    public function get(string $path)
     {
         $config = explode('/', $path);
         $param = $this->configs;
