@@ -52,12 +52,11 @@ class Page
 
     public function getProperty(string $id)
     {
-        return $this->properties[$id];
+        return $this->properties[$id] ?? '';
     }
 
     public function showProperty(string $id) : void
     {
-        $id = strtoupper($id);
         echo "#FW_PAGE_PROPERTY_{$id}#";
     }
 
@@ -65,7 +64,6 @@ class Page
     {
         $allReplace = [];
         foreach ($this->properties as $key=>$property) {
-            $key = strtoupper($key);
             $allReplace["#FW_PAGE_PROPERTY_{$key}#"] = $property;
         }
         return $allReplace;

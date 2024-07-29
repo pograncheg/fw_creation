@@ -5,13 +5,14 @@ require_once './Fw/init.php';
 if (!defined('CORE')) {
     die();
 }
-
 $app->startBuffer();
 $app->header();
-echo "<p id='content'>Content</p>";
 ?>
 
 <pre>
+-------- 29.07.2024 --------
+1) Перенесен старт буфера и заполнения тестовыми данными в header().
+2) Перенесен endBuffer() и вывод окончательного контента после замены макросов в footer();
 -------- 27.07.2024 --------
 1) Обращение к классу за его названием исправлено на использование ::class.
 2) В класс Application добавлена инициализация класса Config для получения id шаблона.
@@ -35,7 +36,4 @@ echo "<p id='content'>Content</p>";
 
 <?php 
 $app->footer();
-$content = $app->endBuffer();
-$app->restartBuffer();
-echo $content;
 ?>

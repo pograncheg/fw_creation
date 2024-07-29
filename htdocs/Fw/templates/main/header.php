@@ -9,3 +9,5 @@
 </head>
 <body>
     <h1><?php $this->getPager()->showProperty('h1');?></h1>
+    <p id='content'>Content</p>
+
