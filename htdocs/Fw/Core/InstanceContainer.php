@@ -9,7 +9,7 @@ class InstanceContainer
     public static function getInstance(string $className) : object
     {
         if (!isset(self::$instances[$className])) {
-            self::$instances[$className] = $className::get();
+            self::$instances[$className] = $className::getObj();
         }
         return self::$instances[$className];
     }

@@ -1,7 +1,6 @@
 <?php
 
 require_once './Fw/init.php';
-
 if (!defined('CORE')) {
     die();
 }
@@ -10,6 +9,19 @@ $app->header();
 ?>
 
 <pre>
+-------- 04.08.2024 --------
+1) Создание файловой структуры хранения компонентов и шаблонов.
+2) Описание общего класса компонентов Base.
+3) Описание класса управления шаблоном компонента Template.
+4) Доработка Application. Описание метода includeComponent.
+5) Доработка Page и буффер. Разделение showHead на showCss, showJs и showString. 
+-------- 01.08.2024 --------
+1) Создание класса \Core\Type\Dictionary, реализующего интерейсы Iterator, ArrayAccess
+, Countable, JsonSerializable.
+2) Реализация дополнительных методов get($name), set($name, $value), __construct($values, bool $readonly = false), getValues(), setValues($values)
+, clear() и свойства  $readonly.
+3) Создание классов Request, Server и Session, которые наследуются от Dictionary.
+4) Доработка класса Application.
 -------- 29.07.2024 --------
 1) Перенесен старт буфера и заполнения тестовыми данными в header().
 2) Перенесен endBuffer() и вывод окончательного контента после замены макросов в footer();
@@ -35,5 +47,12 @@ $app->header();
 </pre>
 
 <?php 
-$app->footer();
+    $app->includeComponent(
+        'test:TestComponent',
+        'main',
+        [
+            "sort" => "id",
+        ]
+    );
+    $app->footer();
 ?>

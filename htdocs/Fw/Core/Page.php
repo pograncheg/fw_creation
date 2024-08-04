@@ -19,7 +19,7 @@ class Page
 
     }
 
-    public static function get() : self
+    public static function getObj() : self
     {
         return new self;
     }
@@ -74,6 +74,21 @@ class Page
         echo "#FW_PAGE_MACRO_HEAD#";
     }
 
+    public function showJs() : void
+    {
+        echo "#FW_PAGE_MACRO_JS#";
+    }
+
+    public function showCss() : void
+    {
+        echo "#FW_PAGE_MACRO_CSS#";
+    }
+
+    public function showString() : void
+    {
+        echo "#FW_PAGE_MACRO_STRING#";
+    }
+
     public function getHead() : string
     {
         $content = '';
@@ -97,6 +112,43 @@ class Page
             }
         }
         return $content;
-      }
+    }
+
+    public function getJs()
+    {
+        $js = '';
+        if ($this->head['js'] !== []) {
+            foreach ($this->head['js'] as $el) {
+                if (file_exists($el)) {
+                    $js .= "<script src=$el></script>";
+                }
+            }
+        }
+        return $js;
+    }
+
+    public function getCss()
+    {
+        $css = '';
+        if ($this->head['css'] !== []) {
+            foreach ($this->head['css'] as $el) {
+                if (file_exists($el)) {
+                    $css .= "<link rel='stylesheet' href=$el>";
+                }
+            }
+        }
+        return $css;
+    }
+
+    public function getString()
+    {
+        $string = '';
+        if ($this->head['str'] !== []) {
+            foreach ($this->head['str'] as $el) {
+                $string .= $el;
+            }
+        }
+        return $string;
+    }
 
 }
