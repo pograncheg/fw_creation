@@ -1,7 +1,6 @@
 <?php
 
 Define('CORE', true);
-
 // spl_autoload_register(function ($class) {
 
 //     $prefix = 'Fw\\Core\\';
@@ -24,15 +23,6 @@ Define('CORE', true);
 
 spl_autoload_register(function ($class) {
     $file = str_replace('\\', '/', $class) . '.php';
-    // echo $file . '<br>';
-    if (file_exists($file)) {
-        require $file;
-    }
-});
-
-spl_autoload_register(function ($component) {
-    $file = str_replace('\\', '/', $component) . '.class.php';
-    // echo $file . '<br>';
     if (file_exists($file)) {
         require $file;
     }

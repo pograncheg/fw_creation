@@ -4,6 +4,7 @@ require_once './Fw/init.php';
 if (!defined('CORE')) {
     die();
 }
+
 $app->startBuffer();
 $app->header();
 ?>
@@ -47,8 +48,9 @@ $app->header();
 </pre>
 
 <?php 
+    
     $app->includeComponent(
-        'test:TestComponent',
+        'fw:interface.form',
         'main',
         [
             "sort" => "id",

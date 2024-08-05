@@ -1,7 +1,7 @@
 <?php
-namespace Fw\Components\Test;
+namespace Fw;
 
-class TestComponent extends \Fw\Core\Component\Base
+class Form extends \Fw\Core\Component\Base
 
 {
     public function __construct()

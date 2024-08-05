@@ -93,22 +93,27 @@ final class Application
         $namespace = explode(':', $component)[0];
         $componentId = explode(':', $component)[1]; 
         $componentPath = 'fw/components/' . $namespace;
-        if (!file_exists($componentPath . '/' . $componentId . '.class.php')) {
+        $classesBefore = get_declared_classes();
+        echo '<br>';
+        if (!file_exists($componentPath . '/' . $componentId . '/.class.php')) {
             return;
         }
-        $componentName = str_replace('/', '\\', $componentPath . '/' . $componentId);
+        include $componentPath . '/' . $componentId . '/.class.php';
+        $classesAfter = get_declared_classes();
+        $newClass = array_diff($classesAfter, $classesBefore);
+        foreach ($newClass as $className) {
+            if($className !== 'Fw\Core\Component\Base') {
+                $componentName = $className;
+            }
+        }
         $obj = new $componentName($componentId, $params, $componentPath);
         $obj->template = new \Fw\Core\Component\Template($template, $obj);
-        $obj->template->__path = $componentPath . '/templates/' . $obj->template->id . '/';
+        $obj->template->__path = $componentPath . '/' . $componentId . '/templates/' . $obj->template->id . '/';
         $obj->template->__relativePath = 'localhost/' . $obj->template->__path;
         $obj->executeComponent();
         $obj->template->includeTemplate($obj->params, $obj->result);
-        // $obj->template->render('result_modifier.php');
-        // $obj->template->render('template');
-        // $obj->template->render('component_epilog.php');
         $this->pager->addCss($obj->template->__path . 'style.css');
         $this->pager->addJs($obj->template->__path . 'script.js');
-        // $obj->template->render('template');
     }
 
 }
