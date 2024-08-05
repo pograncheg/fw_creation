@@ -56,5 +56,12 @@ $app->header();
             "sort" => "id",
         ]
     );
+    $app->includeComponent(
+        'fw:interface.form',
+        'main',
+        [
+            "sort" => "id",
+        ]
+    );
     $app->footer();
 ?>

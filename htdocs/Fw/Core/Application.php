@@ -9,6 +9,7 @@ final class Application
     private ?object $server = null;
     private ?object $session = null;
     private ?object $config = null;
+    private array $componentClass = [];
 
     private function __construct()
     {
@@ -52,7 +53,7 @@ final class Application
         include_once "./Fw/templates/$id/header.php"; 
 
         $this->pager->addString("<link rel='icon' href='https://cdn-icons-png.flaticon.com/512/5541/5541717.png' type='image/x-icon'>");
-        $this->pager->addCss('Fw/assets/main.css');
+        // $this->pager->addCss('Fw/assets/main.css');
         $this->pager->setProperty('title', 'MySite');
         $this->pager->setProperty('h1', 'Главная');
     }
@@ -78,7 +79,6 @@ final class Application
         $arrReplace["#FW_PAGE_MACRO_JS#"] = $this->pager->getJs();
         $arrReplace["#FW_PAGE_MACRO_CSS#"] = $this->pager->getCss();
         $arrReplace["#FW_PAGE_MACRO_STRING#"] = $this->pager->getString();
-        // $arrReplace["#FW_PAGE_MACRO_HEAD#"] = $this->pager->getHead();
         $content = str_replace(array_keys($arrReplace), array_values($arrReplace), $content);
         return $content;
     }
@@ -92,28 +92,28 @@ final class Application
     {
         $namespace = explode(':', $component)[0];
         $componentId = explode(':', $component)[1]; 
-        $componentPath = 'fw/components/' . $namespace;
-        $classesBefore = get_declared_classes();
-        echo '<br>';
-        if (!file_exists($componentPath . '/' . $componentId . '/.class.php')) {
-            return;
-        }
-        include $componentPath . '/' . $componentId . '/.class.php';
-        $classesAfter = get_declared_classes();
-        $newClass = array_diff($classesAfter, $classesBefore);
-        foreach ($newClass as $className) {
-            if($className !== 'Fw\Core\Component\Base') {
-                $componentName = $className;
+        $componentPath = 'fw/components/' . $namespace . '/' . $componentId . '/';
+        if (array_key_exists($component, $this->componentClass)) {
+            $componentName = $this->componentClass[$component];
+        } else {
+            $classesBefore = get_declared_classes();
+            if (!file_exists($componentPath . '.class.php')) {
+                return;
             }
+            include $componentPath . '.class.php';
+            $classesAfter = get_declared_classes();
+            $newClass = array_diff($classesAfter, $classesBefore);
+            foreach ($newClass as $className) {
+                if($className !== 'Fw\Core\Component\Base') {
+                    $componentName = $className;
+                }
+            }
+            $this->componentClass[$component] = $componentName;
         }
         $obj = new $componentName($componentId, $params, $componentPath);
         $obj->template = new \Fw\Core\Component\Template($template, $obj);
-        $obj->template->__path = $componentPath . '/' . $componentId . '/templates/' . $obj->template->id . '/';
-        $obj->template->__relativePath = 'localhost/' . $obj->template->__path;
         $obj->executeComponent();
-        $obj->template->includeTemplate($obj->params, $obj->result);
         $this->pager->addCss($obj->template->__path . 'style.css');
         $this->pager->addJs($obj->template->__path . 'script.js');
     }
-
 }

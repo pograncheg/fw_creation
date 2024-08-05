@@ -28,7 +28,7 @@ class Page
     public function addJs(string $src) : void
     {
         if (!in_array($src, $this->head['js'])) {
-            $this->head['js'][] = $src;
+            $this->head['js'][] = "<script src=$src></script>";
         }
 
     }
@@ -36,7 +36,7 @@ class Page
     public function addCss(string $link) : void
     {
         if (!in_array($link, $this->head['css'])) {
-            $this->head['css'][] = $link;
+            $this->head['css'][] = "<link rel='stylesheet' href=$link>";
         }
     }
 
@@ -116,39 +116,17 @@ class Page
 
     public function getJs()
     {
-        $js = '';
-        if ($this->head['js'] !== []) {
-            foreach ($this->head['js'] as $el) {
-                if (file_exists($el)) {
-                    $js .= "<script src=$el></script>";
-                }
-            }
-        }
-        return $js;
+        return implode($this->head['js']);
     }
 
     public function getCss()
     {
-        $css = '';
-        if ($this->head['css'] !== []) {
-            foreach ($this->head['css'] as $el) {
-                if (file_exists($el)) {
-                    $css .= "<link rel='stylesheet' href=$el>";
-                }
-            }
-        }
-        return $css;
+        return implode($this->head['css']);
     }
 
     public function getString()
     {
-        $string = '';
-        if ($this->head['str'] !== []) {
-            foreach ($this->head['str'] as $el) {
-                $string .= $el;
-            }
-        }
-        return $string;
+        return implode($this->head['str']);
     }
 
 }
