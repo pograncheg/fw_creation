@@ -11,11 +11,14 @@ abstract class Base
 
     public abstract function executeComponent();
 
-    public function __construct($id, $params, $__path)
+    public function __construct($id, $params, $__path, $template)
     {
         $this->id = $id;
         $this->params = $params;
         $this->__path = $__path;
+        if ($template !== null) {
+            $this->template = new Template($template, $this);
+        }
     }
 
 }

@@ -1,6 +1,8 @@
 <?php
 
 Define('CORE', true);
+use Fw\Core\InstanceContainer;
+use Fw\Core\Application;
 // spl_autoload_register(function ($class) {
 
 //     $prefix = 'Fw\\Core\\';
@@ -30,4 +32,4 @@ spl_autoload_register(function ($class) {
 
 session_start();
 
-$app = Fw\Core\InstanceContainer::getInstance(Fw\Core\Application::class);
+$app = InstanceContainer::getInstance(Application::class);

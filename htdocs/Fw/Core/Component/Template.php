@@ -1,6 +1,7 @@
 <?php
 namespace Fw\Core\Component;
-
+use \Fw\Core\InstanceContainer;
+use \Fw\Core\Page;
 class Template
 {
     public $id;
@@ -31,10 +32,10 @@ class Template
         $this->render('template');
         $this->render('component_epilog.php');
         if (file_exists($this->__path . 'style.css')) {
-            \Fw\Core\InstanceContainer::getInstance(\Fw\Core\Page::class)->addCss($this->__path . 'style.css');
+            InstanceContainer::getInstance(Page::class)->addCss($this->__path . 'style.css');
         }
-        if (file_exists($this->__path . 'style.css')) {
-            \Fw\Core\InstanceContainer::getInstance(\Fw\Core\Page::class)->addJs($this->__path . 'script.js');
+        if (file_exists($this->__path . 'script.js')) {
+            InstanceContainer::getInstance(Page::class)->addJs($this->__path . 'script.js');
         }
 
     }

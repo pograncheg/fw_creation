@@ -1,5 +1,8 @@
 <?php
 namespace Fw\Core;
+use Fw\Core\Type\Request;
+use Fw\Core\Type\Server;
+use Fw\Core\Type\Session;
 
 // use Fw\Example;
 final class Application
@@ -14,9 +17,9 @@ final class Application
     private function __construct()
     {
         $this->pager = InstanceContainer::getInstance(Page::class);
-        $this->request = InstanceContainer::getInstance(\Fw\Core\Type\Request::class);
-        $this->server = InstanceContainer::getInstance(\Fw\Core\Type\Server::class);
-        $this->session = InstanceContainer::getInstance(\Fw\Core\Type\Session::class);
+        $this->request = InstanceContainer::getInstance(Request::class);
+        $this->server = InstanceContainer::getInstance(Server::class);
+        $this->session = InstanceContainer::getInstance(Session::class);
         $this->config = InstanceContainer::getInstance(Config::class);
     }
 
@@ -82,7 +85,7 @@ final class Application
         ob_end_clean();
     }
 
-    public function includeComponent(string $component, string $template, array $params)
+    public function includeComponent(string $component, string|null $template, array $params)
     {
         $namespace = explode(':', $component)[0];
         $componentId = explode(':', $component)[1]; 
@@ -104,8 +107,8 @@ final class Application
             }
             $this->componentClass[$component] = $componentName;
         }
-        $obj = new $componentName($componentId, $params, $componentPath);
-        $obj->template = new \Fw\Core\Component\Template($template, $obj);
+        $obj = new $componentName($componentId, $params, $componentPath, $template);
+        // $obj->template = new \Fw\Core\Component\Template($template, $obj);
         $obj->executeComponent();
     }
 }

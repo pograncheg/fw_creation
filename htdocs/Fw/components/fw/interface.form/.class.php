@@ -1,7 +1,9 @@
 <?php
 namespace Fw;
-
-class Form extends \Fw\Core\Component\Base
+use Fw\Core\InstanceContainer;
+use Fw\Core\Page;
+use \Fw\Core\Component\Base;
+class Form extends Base
 
 {
     public function executeComponent()
@@ -9,7 +11,7 @@ class Form extends \Fw\Core\Component\Base
         $this->result['title'] = ['Название страницы'];
         $this->result['h2'] = ['наш шаблон'];
         $this->template->includeTemplate();
-        \Fw\Core\InstanceContainer::getInstance(\Fw\Core\Page::class)->setProperty($this->id . '_title', 'Здесь будет наш компонент');
+        InstanceContainer::getInstance(Page::class)->setProperty($this->id . '_title', 'Здесь будет наш компонент');
     }
 
 }
