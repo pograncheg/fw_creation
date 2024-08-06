@@ -30,5 +30,12 @@ class Template
         $this->render('result_modifier.php');
         $this->render('template');
         $this->render('component_epilog.php');
+        if (file_exists($this->__path . 'style.css')) {
+            \Fw\Core\InstanceContainer::getInstance(\Fw\Core\Page::class)->addCss($this->__path . 'style.css');
+        }
+        if (file_exists($this->__path . 'style.css')) {
+            \Fw\Core\InstanceContainer::getInstance(\Fw\Core\Page::class)->addJs($this->__path . 'script.js');
+        }
+
     }
 }

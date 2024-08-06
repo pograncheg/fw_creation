@@ -10,6 +10,11 @@ class Config
         $this->configs = include_once('./Fw/config.php');
     }
 
+    public static function getObj() : self
+    {
+        return new self;
+    }
+
     public function get(string $path)
     {
         $config = explode('/', $path);

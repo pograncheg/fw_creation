@@ -8,7 +8,8 @@ class Form extends \Fw\Core\Component\Base
     {
         $this->result['title'] = ['Название страницы'];
         $this->result['h2'] = ['наш шаблон'];
-        $this->template->includeTemplate($this->params, $this->result);
+        $this->template->includeTemplate();
+        \Fw\Core\InstanceContainer::getInstance(\Fw\Core\Page::class)->setProperty($this->id . '_title', 'Форма');
     }
 
 }

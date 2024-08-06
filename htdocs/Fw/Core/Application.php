@@ -17,7 +17,7 @@ final class Application
         $this->request = InstanceContainer::getInstance(\Fw\Core\Type\Request::class);
         $this->server = InstanceContainer::getInstance(\Fw\Core\Type\Server::class);
         $this->session = InstanceContainer::getInstance(\Fw\Core\Type\Session::class);
-        $this->config = new Config;
+        $this->config = InstanceContainer::getInstance(Config::class);
     }
 
     public static function getObj() : self
@@ -48,14 +48,8 @@ final class Application
     public function header() : void
     {
         $this->startBuffer();
-
         $id = $this->config->get('template/id');
         include_once "./Fw/templates/$id/header.php"; 
-
-        $this->pager->addString("<link rel='icon' href='https://cdn-icons-png.flaticon.com/512/5541/5541717.png' type='image/x-icon'>");
-        // $this->pager->addCss('Fw/assets/main.css');
-        $this->pager->setProperty('title', 'MySite');
-        $this->pager->setProperty('h1', 'Главная');
     }
 
     public function footer() : void
@@ -113,7 +107,5 @@ final class Application
         $obj = new $componentName($componentId, $params, $componentPath);
         $obj->template = new \Fw\Core\Component\Template($template, $obj);
         $obj->executeComponent();
-        $this->pager->addCss($obj->template->__path . 'style.css');
-        $this->pager->addJs($obj->template->__path . 'script.js');
     }
 }
