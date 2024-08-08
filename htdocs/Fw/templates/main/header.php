@@ -18,9 +18,9 @@
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="/index.php">Главная</a>
                     </li>
-                    <li class="nav-item">
+                    <!-- <li class="nav-item">
                         <a class="nav-link" href="/Fw/test/index.php">Форма</a>
-                    </li>
+                    </li> -->
                 </ul>
         </header>
 

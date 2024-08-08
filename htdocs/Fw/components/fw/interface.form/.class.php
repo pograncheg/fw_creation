@@ -104,7 +104,11 @@ class Form extends Base
                 case 'multiple':
                     if($value) {
                         $result['multiple'] = "$key";
-                        $result = $this->multiple($el, $result);
+                        // $result = $this->multiple($el, $result);
+                        if($el['type'] === 'select') {
+                            $result['str'] .= ' multiple';
+                        }
+                        $result['str'] = str_replace("name={$el['name']}", "name={$el['name']}[]", $result['str']);
                     }
                     break;
             }
@@ -112,37 +116,13 @@ class Form extends Base
         return $result;
     }
 
-    public function multiple($el, $result)
-    {
-        if($el['type'] === 'select') {
-            $result['str'] .= ' multiple';
-        }
-        $result['str'] = str_replace("name={$el['name']}", "name={$el['name']}[]", $result['str']);
-        return $result;
-    }
-
-    public function text(array $params)
-    {
-        $result = "<input type={$params['type']} name={$params['name']} ";
-        foreach ($params as $key => $value) {
-            switch ($key) {
-                case 'additional_class':
-                    $result .= "$key=$value ";
-                    break;
-                case 'title':
-                    $result .= "$key=$value ";
-                    break;
-                case 'placeholder':
-                    $result .= "$key=$value ";
-                    break;
-                case 'attr':
-                    foreach ($value as $attrName => $attr) {
-                        $result .= "$attrName=$attr ";
-                    }
-                    break;
-            }
-        }
-        return $result . ">";
-    }
+    // public function multiple($el, $result)
+    // {
+    //     if($el['type'] === 'select') {
+    //         $result['str'] .= ' multiple';
+    //     }
+    //     $result['str'] = str_replace("name={$el['name']}", "name={$el['name']}[]", $result['str']);
+    //     return $result;
+    // }
 
 }
