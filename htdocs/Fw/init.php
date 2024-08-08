@@ -1,8 +1,8 @@
 <?php
 
 Define('CORE', true);
-use Fw\Core\InstanceContainer;
-use Fw\Core\Application;
+use \Fw\Core\InstanceContainer;
+use \Fw\Core\Application;
 // spl_autoload_register(function ($class) {
 
 //     $prefix = 'Fw\\Core\\';
@@ -22,6 +22,9 @@ use Fw\Core\Application;
 //         require $file;
 //     }
 // });
+// require 'Fw/Core/InstanceContainer.php';
+// require 'Fw/Core/Application.php';
+// echo __DIR__;
 
 spl_autoload_register(function ($class) {
     $file = str_replace('\\', '/', $class) . '.php';

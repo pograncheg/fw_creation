@@ -28,9 +28,9 @@ class Template
     public function includeTemplate()
     {
         // тут используем параметры и результат работы компонента через $this->component->result (и params)
-        $this->render('result_modifier.php');
+        $this->render('result_modifier');
         $this->render('template');
-        $this->render('component_epilog.php');
+        $this->render('component_epilog');
         if (file_exists($this->__path . 'style.css')) {
             InstanceContainer::getInstance(Page::class)->addCss($this->__path . 'style.css');
         }
