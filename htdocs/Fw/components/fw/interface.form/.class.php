@@ -35,22 +35,6 @@ class Form extends Base
         foreach ($this->params['elements'] as $el) {
             $this->result['elements'][$el['name']] = ["component" => "fw:interface.form.{$el['type']}", 'template' => 'main', 'params' => $el];
         }
-        // var_dump($this->result['elements']);
-        // print_r($result['form']);
-        // $this->result['form'] = [
-        //     "method = {$this->params['method']}",
-        //     "action = {$this->params['action']}",
-        // ];
-        // if (isset($this->params['additional_class'])) {
-        //     $this->result['form'][] = "class = {$this->params['additional_class']}";
-        // }
-        
-        // foreach ($this->params['attr'] as $attr => $value) {
-        //     $this->result['form'][] = "$attr = $value";
-        // }
-        // foreach ($this->params['elements'] as $el) {
-        //     $this->result['elements'][$el['name']] = $this->getElement($el);
-        // }
         $this->template->includeTemplate();
         InstanceContainer::getInstance(Page::class)->setProperty($this->id . '_title', 'Форма для заполнения');
     }
