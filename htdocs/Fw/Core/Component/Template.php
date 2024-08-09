@@ -11,6 +11,7 @@ class Template
 
     public function __construct(string $id, $component)
     {
+        // echo $component->__path;
         $this->id = $id;
         $this->component = $component;
         $this->__path = $component->__path . 'templates/' . $id .'/';
@@ -32,10 +33,10 @@ class Template
         $this->render('template');
         $this->render('component_epilog');
         if (file_exists($this->__path . 'style.css')) {
-            InstanceContainer::getInstance(Page::class)->addCss($this->__path . 'style.css');
+            InstanceContainer::getInstance(Page::class)->addCss(str_replace($_SERVER['DOCUMENT_ROOT'], '', $this->__path) . 'style.css');
         }
         if (file_exists($this->__path . 'script.js')) {
-            InstanceContainer::getInstance(Page::class)->addJs($this->__path . 'script.js');
+            InstanceContainer::getInstance(Page::class)->addJs(str_replace($_SERVER['DOCUMENT_ROOT'], '', $this->__path) . 'script.js');
         }
 
     }

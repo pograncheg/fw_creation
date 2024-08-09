@@ -52,13 +52,13 @@ final class Application
     {
         $this->startBuffer();
         $id = $this->config->get('template/id');
-        include_once "./Fw/templates/$id/header.php"; 
+        include_once $_SERVER['DOCUMENT_ROOT'] . "/Fw/templates/$id/header.php"; 
     }
 
     public function footer() : void
     {
         $id = $this->config->get('template/id');
-        include_once "./Fw/templates/$id/footer.php";
+        include_once $_SERVER['DOCUMENT_ROOT'] . "/Fw/templates/$id/footer.php";
         $content = $this->endBuffer();
         $this->restartBuffer();
         echo $content;
@@ -89,7 +89,7 @@ final class Application
     {
         $namespace = explode(':', $component)[0];
         $componentId = explode(':', $component)[1]; 
-        $componentPath = 'fw/components/' . $namespace . '/' . $componentId . '/';
+        $componentPath = $_SERVER['DOCUMENT_ROOT'] . '/fw/components/' . $namespace . '/' . $componentId . '/';
         if (array_key_exists($component, $this->componentClass)) {
             $componentName = $this->componentClass[$component];
         } else {

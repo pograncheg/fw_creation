@@ -7,7 +7,7 @@ class Config
 
     public function __construct()
     {
-        $this->configs = include_once('./Fw/config.php');
+        $this->configs = include_once($_SERVER['DOCUMENT_ROOT'] . '/Fw/config.php');
     }
 
     public static function getObj() : self

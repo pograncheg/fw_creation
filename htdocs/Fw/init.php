@@ -27,7 +27,7 @@ use \Fw\Core\Application;
 // echo __DIR__;
 
 spl_autoload_register(function ($class) {
-    $file = str_replace('\\', '/', $class) . '.php';
+    $file = $_SERVER['DOCUMENT_ROOT'] . '/' . str_replace('\\', '/', $class) . '.php';
     if (file_exists($file)) {
         require $file;
     }

@@ -3,7 +3,7 @@
         &copy; Copyright <?= date('Y') ?>
     </div>
 </footer>
-<script src="Fw/assets/js/bootstrap.bundle.min.js"></script>
+<script src="/Fw/assets/js/bootstrap.bundle.min.js"></script>
 </div>
 </body>
 </html>
